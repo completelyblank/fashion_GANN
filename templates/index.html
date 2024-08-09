@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GANN</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Fashion GANN</h1>
+        <button id="generate-button">Generate Image</button>
+        <img id="generated-image" src="" alt="Generated Image">
+    </div>
+    <script>
+        document.getElementById('generate-button').addEventListener('click', () => {
+    fetch('http://localhost:5000/generate', {
+        method: 'POST'
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        const url = URL.createObjectURL(blob);
+        document.getElementById('generated-image').src = url;
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+    </script>
+</body>
+</html>
